@@ -1,0 +1,16 @@
+[package]
+name = "egui-eva"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "label"
+path = "src/label.rs"
+
+[[bin]]
+name = "button"
+path = "src/button.rs"
+
+[dependencies]
+egui = "0.31.0"
+eframe="0.31.0"
