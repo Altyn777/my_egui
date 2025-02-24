@@ -839,14 +839,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "egui-eva"
-version = "0.1.0"
-dependencies = [
- "eframe",
- "egui",
-]
-
-[[package]]
 name = "egui-wgpu"
 version = "0.31.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1704,6 +1696,14 @@ checksum = "b3b1c9bd4fe1f0f8b387f6eb9eb3b4a1aa26185e5750efb9140301703f62cd1b"
 dependencies = [
  "adler2",
  "simd-adler32",
+]
+
+[[package]]
+name = "my_egui"
+version = "0.1.0"
+dependencies = [
+ "eframe",
+ "egui",
 ]
 
 [[package]]
