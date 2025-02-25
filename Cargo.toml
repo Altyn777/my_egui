@@ -11,6 +11,10 @@ path = "src/label.rs"
 name = "button"
 path = "src/button.rs"
 
+[[bin]]
+name = "panel"
+path = "src/panel.rs"
+
 [dependencies]
 egui = "0.31.0"
 eframe="0.31.0"
