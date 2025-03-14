@@ -22,17 +22,16 @@ impl eframe::App for MyApp {
                 .placeholder("Введіть ваше ім'я...")
                 .show(ui);
 
-            widgets::Input::new(&mut self.text2)
-                .placeholder("Chichi")
-                .enabled(false)
-                .show(ui);
-
-            if components::ControlButtonValue::new(&mut self.text3)
+            if components::ControlButtonValue::new(&mut self.text2, &String::from("Cat name"))
                 .show(ui)
                 .clicked()
             {
-                println!("Hana {}", self.text3);
+                println!("Feed {}", self.text2);
             }
+
+            components::ControlButtonValue::new(&mut self.text3, &String::from("Cat name"))
+                .enabled(false)
+                .show(ui)
         });
     }
 }
