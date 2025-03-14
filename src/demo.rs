@@ -22,14 +22,15 @@ impl eframe::App for MyApp {
                 .placeholder("Введіть ваше ім'я...")
                 .show(ui);
 
-            if components::ControlButtonValue::new(&mut self.text2, &String::from("Cat name"))
+            if components::ControlButtonValue::new(&mut self.text2)
+                .placeholder(&String::from("Kitty"))
                 .show(ui)
                 .clicked()
             {
                 println!("Feed {}", self.text2);
             }
 
-            components::ControlButtonValue::new(&mut self.text3, &String::from("Cat name"))
+            components::ControlButtonValue::new(&mut self.text3)
                 .enabled(false)
                 .show(ui)
         });

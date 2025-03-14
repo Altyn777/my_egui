@@ -4,6 +4,7 @@ use egui::{Response, Ui};
 pub struct ControlButtonValue<'a> {
     text_input: &'a mut String,
     enabled: bool,
+    placeholder: Option<String>,
 }
 
 impl<'a> ControlButtonValue<'a> {
@@ -11,6 +12,7 @@ impl<'a> ControlButtonValue<'a> {
         Self {
             text_input,
             enabled: true,
+            placeholder: None,
         }
     }
 
@@ -19,24 +21,30 @@ impl<'a> ControlButtonValue<'a> {
         self
     }
 
+    pub fn placeholder(mut self, placeholder: impl Into<String>) -> Self {
+        self.placeholder = Some(placeholder.into());
+        self
+    }
+
     pub fn show(self, ui: &mut Ui) -> Response {
         let ControlButtonValue {
             text_input,
             enabled,
+            placeholder,
         } = self;
-        ui.vertical(|ui| {
-            let input_response = Input::new(text_input)
-                .placeholder("type cat")
-                .enabled(enabled)
-                .show(ui);
 
-            ui.add_space(8.0);
+        ui.horizontal(|ui| {
+            let mut input = Input::new(text_input).enabled(enabled);
+
+            if let Some(placeholder_text) = placeholder {
+                input = input.placeholder(placeholder_text);
+            }
+
+            input.show(ui);
 
             ColorText::new("cat")
                 .color(egui::Color32::from_rgb(150, 150, 150))
                 .show(ui);
-
-            ui.add_space(16.0);
 
             let button_response = Button::new("Годувати")
                 .enabled(enabled && !text_input.is_empty())

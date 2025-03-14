@@ -19,11 +19,9 @@ impl eframe::App for MyApp {
                 .show(ui);
             widgets::ColorText::new("Item Value")
                 .color(Color32::WHITE)
-                .size(14.0)
                 .show(ui);
             widgets::ColorText::new("Item Value")
                 .color(Color32::BLACK)
-                .size(14.0)
                 .show(ui);
         });
     }
