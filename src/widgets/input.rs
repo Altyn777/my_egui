@@ -1,15 +1,15 @@
 use egui::{Color32, Response, TextEdit, Ui, Vec2};
 
-pub struct Input {
-    text: String,
+pub struct Input<'a> {
+    text: &'a mut String,
     placeholder: Option<String>,
     enabled: bool,
 }
 
-impl Input {
-    pub fn new(text: &mut String) -> Self {
+impl<'a> Input<'a> {
+    pub fn new(text: &'a mut String) -> Self {
         Self {
-            text: text.clone(),
+            text,
             placeholder: None,
             enabled: true,
         }
@@ -32,36 +32,25 @@ impl Input {
             enabled,
         } = self;
 
-        let border_color = if enabled {
-            Color32::from_rgb(100, 100, 100)
-        } else {
-            Color32::from_rgb(60, 60, 60)
-        };
+        let is_empty = text.is_empty();
 
-        let mut text_edit = TextEdit::singleline(&text).frame(true).interactive(enabled);
+        let original_button_padding = ui.spacing().button_padding;
+        ui.spacing_mut().button_padding = Vec2::new(8.0, 8.0);
+
+        let mut text_edit = TextEdit::singleline(text).frame(true).interactive(enabled);
 
         if let Some(placeholder_text) = placeholder {
-            if text.is_empty() {
+            if is_empty {
                 text_edit = text_edit.hint_text(placeholder_text);
             }
         }
 
-        let frame_visuals = ui.visuals().widgets.inactive;
-        let mut custom_frame = frame_visuals.clone();
-        custom_frame.bg_stroke.color = border_color;
-
-        let old_visuals = ui.visuals().clone();
-        let mut visuals = ui.visuals().clone();
-        visuals.widgets.inactive = custom_frame;
-        ui.set_visuals(visuals);
-
-        let original_button_padding = ui.spacing().button_padding;
-
-        ui.spacing_mut().button_padding = Vec2::new(8.0, 8.0);
+        if !enabled {
+            text_edit = text_edit.text_color(Color32::from_rgb(120, 120, 120));
+        }
 
         let response = ui.add(text_edit);
 
-        ui.set_visuals(old_visuals);
         ui.spacing_mut().button_padding = original_button_padding;
 
         response
