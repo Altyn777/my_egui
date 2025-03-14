@@ -1,10 +1,9 @@
 use egui::{
-    menu, CentralPanel, Context, Label, SidePanel, TopBottomPanel, ViewportBuilder, Visuals, Window
+    menu, CentralPanel, Context, Label, SidePanel, TopBottomPanel, ViewportBuilder, Visuals, Window,
 };
 
 #[derive(Default)]
-struct PanelDemo {
-}
+struct PanelDemo {}
 
 impl PanelDemo {
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
@@ -26,7 +25,7 @@ impl eframe::App for PanelDemo {
                         ctx.send_viewport_cmd(egui::ViewportCommand::Close);
                     }
                 });
-                
+
                 ui.menu_button("Edit", |ui| {
                     if ui.button("Cut").clicked() {
                         println!("cut");
@@ -71,6 +70,6 @@ fn main() -> Result<(), eframe::Error> {
     eframe::run_native(
         "Panel Demo",
         options,
-        Box::new(|cc| Ok(Box::new(PanelDemo::new(cc))))
+        Box::new(|cc| Ok(Box::new(PanelDemo::new(cc)))),
     )
 }

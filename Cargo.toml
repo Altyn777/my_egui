@@ -17,4 +17,4 @@ path = "src/panel.rs"
 
 [dependencies]
 egui = "0.31.0"
-eframe="0.31.0"
+eframe = "0.31.0"
