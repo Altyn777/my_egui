@@ -1,4 +1,4 @@
-use egui::{Color32, Response, RichText, Ui};
+use egui::{Color32, Frame, Margin, Response, RichText, Ui};
 
 pub struct ColorText {
     text: String,
@@ -10,7 +10,7 @@ impl ColorText {
     pub fn new(text: impl Into<String>) -> Self {
         Self {
             text: text.into(),
-            color: Color32::BLACK,
+            color: Color32::WHITE,
             size: Some(14.0),
         }
     }
@@ -34,6 +34,11 @@ impl ColorText {
             rich_text = rich_text.size(text_size);
         }
 
-        ui.label(rich_text)
+        let margin = Margin::same(8);
+
+        Frame::new()
+            .inner_margin(margin)
+            .show(ui, |ui| ui.label(rich_text))
+            .response
     }
 }

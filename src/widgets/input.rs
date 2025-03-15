@@ -1,4 +1,4 @@
-use egui::{Color32, Response, TextEdit, Ui, Vec2};
+use egui::{Color32, Margin, Response, TextEdit, Ui, Vec2};
 
 pub struct Input<'a> {
     text: &'a mut String,
@@ -34,10 +34,10 @@ impl<'a> Input<'a> {
 
         let is_empty = text.is_empty();
 
-        let original_button_padding = ui.spacing().button_padding;
-        ui.spacing_mut().button_padding = Vec2::new(8.0, 8.0);
-
-        let mut text_edit = TextEdit::singleline(text).frame(true).interactive(enabled);
+        let mut text_edit = TextEdit::singleline(text)
+            .margin(Margin::same(8))
+            .frame(true)
+            .interactive(enabled);
 
         if let Some(placeholder_text) = placeholder {
             if is_empty {
@@ -50,8 +50,6 @@ impl<'a> Input<'a> {
         }
 
         let response = ui.add(text_edit);
-
-        ui.spacing_mut().button_padding = original_button_padding;
 
         response
     }
