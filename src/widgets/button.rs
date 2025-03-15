@@ -1,4 +1,4 @@
-use egui::{Color32, Response, RichText, Ui, Vec2};
+use egui::{Color32, Response, RichText, Sense, Stroke, Ui, Vec2};
 
 pub struct Button {
     text: String,
@@ -22,8 +22,14 @@ impl Button {
         let Button { text, enabled } = self;
 
         let original_button_padding = ui.spacing().button_padding;
-
         ui.spacing_mut().button_padding = Vec2::new(8.0, 8.0);
+        let prev_visuals = ui.style().visuals.clone();
+        let mut visuals = prev_visuals.clone();
+        let border_stroke = Stroke::new(1.0, Color32::TRANSPARENT);
+        visuals.widgets.inactive.bg_stroke = border_stroke;
+        visuals.widgets.hovered.bg_stroke = border_stroke;
+        visuals.widgets.active.bg_stroke = border_stroke;
+        ui.style_mut().visuals = visuals;
 
         let rich_text = RichText::new(text).color(Color32::WHITE).size(14.0);
 
@@ -36,12 +42,13 @@ impl Button {
         let mut button = egui::Button::new(rich_text).fill(background_color);
 
         if !enabled {
-            button = button.sense(egui::Sense::hover());
+            button = button.sense(Sense::hover());
         }
 
         let response = ui.add(button);
 
         ui.spacing_mut().button_padding = original_button_padding;
+        ui.style_mut().visuals = prev_visuals;
 
         response
     }

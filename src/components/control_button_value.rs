@@ -1,8 +1,9 @@
 use crate::widgets::{Button, ColorText, Input};
-use egui::{Response, Ui};
+use egui::{Color32, Response, Ui};
 
 pub struct ControlButtonValue<'a> {
     text_input: &'a mut String,
+    label: Option<&'a String>,
     enabled: bool,
     placeholder: Option<String>,
 }
@@ -11,6 +12,7 @@ impl<'a> ControlButtonValue<'a> {
     pub fn new(text_input: &'a mut String) -> Self {
         Self {
             text_input,
+            label: None,
             enabled: true,
             placeholder: None,
         }
@@ -26,9 +28,15 @@ impl<'a> ControlButtonValue<'a> {
         self
     }
 
+    pub fn label(mut self, label: &'a String) -> Self {
+        self.label = Some(label);
+        self
+    }
+
     pub fn show(self, ui: &mut Ui) -> Response {
         let ControlButtonValue {
             text_input,
+            label,
             enabled,
             placeholder,
         } = self;
@@ -42,15 +50,15 @@ impl<'a> ControlButtonValue<'a> {
 
             input.show(ui);
 
-            ColorText::new("cat")
-                .color(egui::Color32::from_rgb(150, 150, 150))
-                .show(ui);
+            if let Some(label) = label {
+                ColorText::new(label)
+                    .color(Color32::from_rgb(150, 150, 150))
+                    .show(ui);
+            }
 
-            let button_response = Button::new("Годувати")
+            Button::new("Годувати")
                 .enabled(enabled && !text_input.is_empty())
-                .show(ui);
-
-            button_response
+                .show(ui)
         })
         .inner
     }

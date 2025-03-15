@@ -6,7 +6,6 @@ mod widgets;
 struct MyApp {
     text1: String,
     text2: String,
-    text3: String,
 }
 
 impl MyApp {
@@ -18,19 +17,16 @@ impl MyApp {
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         CentralPanel::default().show(ctx, |ui| {
-            widgets::Input::new(&mut self.text1)
-                .placeholder("Введіть ваше ім'я...")
-                .show(ui);
-
-            if components::ControlButtonValue::new(&mut self.text2)
-                .placeholder(&String::from("Kitty"))
+            if components::ControlButtonValue::new(&mut self.text1)
+                .placeholder(String::from("Kitty"))
+                .label(&String::from("cat"))
                 .show(ui)
                 .clicked()
             {
-                println!("Feed {}", self.text2);
+                println!("Feed {}", self.text1);
             }
 
-            components::ControlButtonValue::new(&mut self.text3)
+            components::ControlButtonValue::new(&mut self.text2)
                 .enabled(false)
                 .show(ui)
         });
