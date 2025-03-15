@@ -1,4 +1,4 @@
-use egui::{Color32, Margin, Response, TextEdit, Ui, Vec2};
+use egui::{Color32, Margin, Response, TextEdit, Ui};
 
 pub struct Input<'a> {
     text: &'a mut String,
@@ -36,6 +36,8 @@ impl<'a> Input<'a> {
 
         let mut text_edit = TextEdit::singleline(text)
             .margin(Margin::same(8))
+            .text_color(Color32::WHITE)
+            .background_color(Color32::from_rgb(5, 9, 25))
             .frame(true)
             .interactive(enabled);
 
@@ -43,10 +45,6 @@ impl<'a> Input<'a> {
             if is_empty {
                 text_edit = text_edit.hint_text(placeholder_text);
             }
-        }
-
-        if !enabled {
-            text_edit = text_edit.text_color(Color32::from_rgb(120, 120, 120));
         }
 
         let response = ui.add(text_edit);
