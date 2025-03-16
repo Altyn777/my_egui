@@ -2,7 +2,7 @@ use egui::{Color32, Margin, Response, Stroke, TextEdit, Ui};
 
 pub struct Input<'a> {
     text: &'a mut String,
-    placeholder: Option<String>,
+    placeholder: Option<&'static str>,
     enabled: bool,
 }
 
@@ -15,8 +15,8 @@ impl<'a> Input<'a> {
         }
     }
 
-    pub fn placeholder(mut self, placeholder: impl Into<String>) -> Self {
-        self.placeholder = Some(placeholder.into());
+    pub fn placeholder(mut self, placeholder: Option<&'static str>) -> Self {
+        self.placeholder = placeholder;
         self
     }
 

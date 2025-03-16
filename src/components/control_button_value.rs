@@ -1,12 +1,14 @@
 use crate::widgets::{Button, ColorText, Input};
 use egui::{Color32, Rect, Response, Ui};
 
+const INPUT_WIDTH: f32 = 58.0;
+
 pub struct ControlButtonValue<'a> {
     text_input: &'a mut String,
     label: Option<&'static str>,
     button_text: &'a str,
     enabled: bool,
-    placeholder: Option<&'a str>,
+    placeholder: Option<&'static str>,
 }
 
 impl<'a> ControlButtonValue<'a> {
@@ -25,7 +27,7 @@ impl<'a> ControlButtonValue<'a> {
         self
     }
 
-    pub fn placeholder(mut self, placeholder: &'a str) -> Self {
+    pub fn placeholder(mut self, placeholder: &'static str) -> Self {
         self.placeholder = Some(placeholder);
         self
     }
@@ -52,14 +54,13 @@ impl<'a> ControlButtonValue<'a> {
         ui.horizontal(|ui| {
             let input_response = Input::new(text_input)
                 .enabled(enabled)
-                .placeholder(placeholder.unwrap_or_default())
+                .placeholder(placeholder)
                 .show(ui);
 
             let input_rect = input_response.rect;
-
             ui.advance_cursor_after_rect(Rect::from_min_size(
                 input_rect.min,
-                egui::vec2(58.0, input_rect.height()),
+                egui::vec2(INPUT_WIDTH, input_rect.height()),
             ));
 
             if let Some(label) = label {
