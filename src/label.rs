@@ -15,7 +15,6 @@ impl eframe::App for MyApp {
         CentralPanel::default().show(ctx, |ui| {
             widgets::ColorText::new("Item Value")
                 .color(Color32::RED)
-                .size(14.0)
                 .show(ui);
             widgets::ColorText::new("Item Value")
                 .color(Color32::WHITE)

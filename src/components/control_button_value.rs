@@ -3,9 +3,10 @@ use egui::{Color32, Rect, Response, Ui};
 
 pub struct ControlButtonValue<'a> {
     text_input: &'a mut String,
-    label: Option<&'a String>,
+    label: Option<&'static str>,
+    button_text: &'a str,
     enabled: bool,
-    placeholder: Option<String>,
+    placeholder: Option<&'a str>,
 }
 
 impl<'a> ControlButtonValue<'a> {
@@ -14,6 +15,7 @@ impl<'a> ControlButtonValue<'a> {
             text_input,
             label: None,
             enabled: true,
+            button_text: "Apply",
             placeholder: None,
         }
     }
@@ -23,19 +25,25 @@ impl<'a> ControlButtonValue<'a> {
         self
     }
 
-    pub fn placeholder(mut self, placeholder: impl Into<String>) -> Self {
-        self.placeholder = Some(placeholder.into());
+    pub fn placeholder(mut self, placeholder: &'a str) -> Self {
+        self.placeholder = Some(placeholder);
         self
     }
 
-    pub fn label(mut self, label: &'a String) -> Self {
+    pub fn label(mut self, label: &'static str) -> Self {
         self.label = Some(label);
+        self
+    }
+
+    pub fn button_text(mut self, button_text: &'a str) -> Self {
+        self.button_text = button_text;
         self
     }
 
     pub fn show(self, ui: &mut Ui) -> Response {
         let ControlButtonValue {
             text_input,
+            button_text,
             label,
             enabled,
             placeholder,
@@ -60,7 +68,7 @@ impl<'a> ControlButtonValue<'a> {
                     .show(ui);
             }
 
-            Button::new("Годувати")
+            Button::new(button_text)
                 .enabled(enabled && !text_input.is_empty())
                 .show(ui)
         })

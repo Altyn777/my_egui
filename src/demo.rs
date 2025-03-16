@@ -18,8 +18,9 @@ impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         CentralPanel::default().show(ctx, |ui| {
             if components::ControlButtonValue::new(&mut self.text1)
-                .placeholder(String::from("Kitty"))
-                .label(&String::from("cat"))
+                .placeholder("Kitty")
+                .label("cat")
+                .button_text("Годувати")
                 .show(ui)
                 .clicked()
             {

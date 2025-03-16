@@ -1,15 +1,15 @@
 use egui::{Color32, Frame, Margin, Response, RichText, Ui};
 
 pub struct ColorText {
-    text: String,
+    text: &'static str,
     color: Color32,
     size: Option<f32>,
 }
 
 impl ColorText {
-    pub fn new(text: impl Into<String>) -> Self {
+    pub fn new(text: &'static str) -> Self {
         Self {
-            text: text.into(),
+            text,
             color: Color32::WHITE,
             size: Some(14.0),
         }
