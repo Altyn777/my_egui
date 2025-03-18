@@ -19,6 +19,10 @@ path = "src/panel.rs"
 name = "demo"
 path = "src/demo.rs"
 
+[[bin]]
+name = "gauge"
+path = "src/gauge.rs"
+
 [dependencies]
 egui = "0.31.0"
 eframe = "0.31.0"
