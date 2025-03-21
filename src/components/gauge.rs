@@ -25,7 +25,7 @@ impl Default for Gauge {
             value: 0.0,
             value_range: 0.0..=100.0,
             size: 200.0,
-            angle_range: 0..=180,
+            angle_range: -45..=225,
             stroke_width: 1.5,
             units: String::new(),
             display_value: true,

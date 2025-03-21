@@ -20,7 +20,7 @@ impl eframe::App for GaugeExample {
             ui.spacing_mut().slider_width = 300.0;
             ui.add(Slider::new(&mut self.value, 0.0..=100.0));
             ui.add(
-                Gauge::new(self.value, 0.0..=100.0, 200.0).angle_range(-45..=225), //.show_value(false),
+                Gauge::new(self.value, 0.0..=100.0, 200.0).angle_range(0..=180), //.show_value(false),
             );
             ui.add(Gauge::new(self.value + 100.0, 100.0..=200.0, 300.0).units("°C"));
         });

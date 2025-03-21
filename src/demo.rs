@@ -1,5 +1,5 @@
 use egui::CentralPanel;
-use my_egui::ControlButtonValue;
+use my_egui::{ControlButtonValue, MyProgressBar};
 
 #[derive(Default)]
 struct MyApp {
@@ -28,7 +28,9 @@ impl eframe::App for MyApp {
 
             ControlButtonValue::new(&mut self.text2)
                 .enabled(false)
-                .show(ui)
+                .show(ui);
+
+            MyProgressBar::new("hi").value(0.6).show(ui)
         });
     }
 }

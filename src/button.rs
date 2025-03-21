@@ -12,7 +12,7 @@ impl ButtonDemo {
     }
 }
 
-fn button_demo(ui: &mut Ui, counter: &mut i32, _frame: &mut eframe::Frame) {
+fn button_demo(ui: &mut Ui, _counter: &mut i32, _frame: &mut eframe::Frame) {
     Button::new("Кнопка").show(ui);
 
     Button::new("Вимкнена кнопка").enabled(false).show(ui);
