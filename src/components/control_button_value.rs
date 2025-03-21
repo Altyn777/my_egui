@@ -1,5 +1,6 @@
-use crate::widgets::{Button, ColorText, Input};
 use egui::{Color32, Rect, Response, Ui};
+
+use crate::widgets::{Button, ColorText, Input};
 
 const INPUT_WIDTH: f32 = 58.0;
 

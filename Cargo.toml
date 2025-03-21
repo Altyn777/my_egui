@@ -3,6 +3,10 @@ name = "my_egui"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "my_egui"
+path = "src/lib.rs"
+
 [[bin]]
 name = "label"
 path = "src/label.rs"

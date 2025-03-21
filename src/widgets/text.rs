@@ -28,6 +28,12 @@ impl ColorText {
     pub fn show(self, ui: &mut Ui) -> Response {
         let ColorText { text, color, size } = self;
 
+        let color = if ui.visuals().dark_mode {
+            Color32::WHITE
+        } else {
+            Color32::BLACK
+        };
+
         let mut rich_text = RichText::new(text).color(color);
 
         if let Some(text_size) = size {

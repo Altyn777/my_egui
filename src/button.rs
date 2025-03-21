@@ -1,5 +1,5 @@
-use egui::{Button, CentralPanel, Context, Label, Pos2, Ui, Vec2, ViewportCommand};
-mod widgets;
+use egui::{CentralPanel, Context, Pos2, Ui, Vec2};
+use my_egui::Button;
 
 #[derive(Default)]
 struct ButtonDemo {
@@ -10,29 +10,14 @@ impl ButtonDemo {
     pub fn new(_cc: &eframe::CreationContext<'_>) -> Self {
         Default::default()
     }
-    fn ui_counter(&mut self, ui: &mut Ui) {
-        ui.horizontal(|ui| {
-            if ui.add_sized([50., 30.], Button::new("-")).clicked() {
-                self.counter -= 1;
-            }
-
-            ui.add_sized([50., 30.], Label::new(self.counter.to_string()));
-
-            if ui.add_sized([50., 30.], Button::new("+")).clicked() {
-                self.counter += 1;
-            }
-        });
-    }
 }
 
 fn button_demo(ui: &mut Ui, counter: &mut i32, _frame: &mut eframe::Frame) {
-    widgets::Button::new("Кнопка").show(ui);
+    Button::new("Кнопка").show(ui);
 
-    widgets::Button::new("Вимкнена кнопка")
-        .enabled(false)
-        .show(ui);
+    Button::new("Вимкнена кнопка").enabled(false).show(ui);
 
-    let button = widgets::Button::new("Натисни мене").enabled(true);
+    let button = Button::new("Натисни мене").enabled(true);
 
     if button.show(ui).clicked() {
         println!("Кнопка натиснута!");
@@ -42,11 +27,7 @@ fn button_demo(ui: &mut Ui, counter: &mut i32, _frame: &mut eframe::Frame) {
 impl eframe::App for ButtonDemo {
     fn update(&mut self, ctx: &Context, frame: &mut eframe::Frame) {
         CentralPanel::default().show(ctx, |ui| {
-            self.ui_counter(ui);
             ui.add_space(10.0);
-            if ui.add_sized([165., 30.], Button::new("Quit")).clicked() {
-                ctx.send_viewport_cmd(ViewportCommand::Close);
-            }
             button_demo(ui, &mut self.counter, frame);
         });
     }

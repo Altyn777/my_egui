@@ -1,6 +1,5 @@
 use egui::CentralPanel;
-mod components;
-mod widgets;
+use my_egui::ControlButtonValue;
 
 #[derive(Default)]
 struct MyApp {
@@ -17,7 +16,7 @@ impl MyApp {
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         CentralPanel::default().show(ctx, |ui| {
-            if components::ControlButtonValue::new(&mut self.text1)
+            if ControlButtonValue::new(&mut self.text1)
                 .placeholder("Kitty")
                 .label("cat")
                 .button_text("Годувати")
@@ -27,7 +26,7 @@ impl eframe::App for MyApp {
                 println!("Feed {}", self.text1);
             }
 
-            components::ControlButtonValue::new(&mut self.text2)
+            ControlButtonValue::new(&mut self.text2)
                 .enabled(false)
                 .show(ui)
         });

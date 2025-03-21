@@ -1,5 +1,5 @@
 use egui::{CentralPanel, Color32};
-mod widgets;
+use my_egui::ColorText;
 
 #[derive(Default)]
 struct MyApp {}
@@ -13,15 +13,8 @@ impl MyApp {
 impl eframe::App for MyApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         CentralPanel::default().show(ctx, |ui| {
-            widgets::ColorText::new("Item Value")
-                .color(Color32::RED)
-                .show(ui);
-            widgets::ColorText::new("Item Value")
-                .color(Color32::WHITE)
-                .show(ui);
-            widgets::ColorText::new("Item Value")
-                .color(Color32::BLACK)
-                .show(ui);
+            ColorText::new("Item Value").color(Color32::RED).show(ui);
+            ColorText::new("Item Value").show(ui);
         });
     }
 }

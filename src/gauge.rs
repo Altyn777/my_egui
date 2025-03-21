@@ -1,6 +1,6 @@
 use eframe::egui;
 use egui::Slider;
-mod components;
+use my_egui::Gauge;
 
 #[derive(Default)]
 struct GaugeExample {
@@ -20,9 +20,9 @@ impl eframe::App for GaugeExample {
             ui.spacing_mut().slider_width = 300.0;
             ui.add(Slider::new(&mut self.value, 0.0..=100.0));
             ui.add(
-                components::Gauge::new(self.value, 0.0..=100.0, 200.0).angle_range(-45..=225), //.show_value(false),
+                Gauge::new(self.value, 0.0..=100.0, 200.0).angle_range(-45..=225), //.show_value(false),
             );
-            ui.add(components::Gauge::new(self.value + 100.0, 100.0..=200.0, 300.0).units("°C"));
+            ui.add(Gauge::new(self.value + 100.0, 100.0..=200.0, 300.0).units("°C"));
         });
     }
 }
